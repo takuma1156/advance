@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+
 class CreateAttendancesTable extends Migration
 {
     /**
@@ -14,7 +15,9 @@ class CreateAttendancesTable extends Migration
     public function up()
     {
         Schema::create('attendances', function (Blueprint $table) {
-            $table->bigIncrements('id')->primaryKey();
+            $table->bigIncrements('attendance_id')->primaryKey();
+            $table->unsignedBiginteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->date('date');
             $table->time('start_time')->nullable();
             $table->time('end_time')->nullable();

@@ -3,21 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Attendance;
+use Carbon\Carbon;
 
 class KintaiController extends Controller
 {
-    //リクエストをattendance.viewに返す
-    public function index(Request $request){
-        $form = $request->all();
-        return view('kintai.attendance',['form' => $form]);
+    //$dateをkintai.viewに送る
+    public function index(Request $request){//アクセスしたタイミングで取得する
+        $date = date('Y-m-d');
+        $dt = Carbon:: now();
+        $times = [ "Today" => $dt,];
+        return view('kintai.kintai',['date' =>$date, 'times' => $times]);
     }
 
     //attendanceテーブルに出勤時間を登録 ※create(save)メソッドは既存レコードの更新を実行する
     public function create(Request $request){
         $attendance = new Attendance;
-        $form = $request->only(['attendance_id','date','start_time']);
+        $form = $request->all();
         unset($form['_token']);
         $attendance->fill($form)->save();//不要?
-        return redirect('/');
+        return redirect('/attendance');
     }
+
 }

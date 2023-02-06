@@ -16,7 +16,7 @@ class CreateBreaktimesTable extends Migration
         Schema::create('breaktimes', function (Blueprint $table) {
             $table->bigIncrements('id')->primaryKey();
             $table->unsignedBiginteger('attendance_id');
-            $table->foreign('attendance_id')->references('id')->on('attendances');
+            $table->foreign('attendance_id')->references('attendance_id')->on('attendances');
             $table->time('break_start_time')->nullable();
             $table->time('break_end_time')->nullable();
             $table->timestamps();

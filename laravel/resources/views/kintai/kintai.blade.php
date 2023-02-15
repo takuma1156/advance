@@ -4,12 +4,21 @@
   <h3>{{$date}}</h3>
   <h4>{{$time}}</h4>
 @endforeach
-<form action="/" method="post">
+
+<p>{{$user->name}}さんお疲れさまです。</p>
+
+<form action="/attendance_start" method="post">
   @csrf
   <table>
-    <input type="hidden" name="user_id" value="1">
-    <input type="hidden" name="date" value="$date">
-    <input type="hidden" name="start_time" value="$times">
+    <input type="hidden" value="{{$user->id}}"name="user_id">
     <tr><th></th><td><input type="submit" value="勤務開始"></td></tr>
   </table>
+</form>
+<form action="/attendance_end" method="post">
+  @csrf
+  <table>
+    <input type="hidden" value="{{$user->id}}">
+    <tr><th></th><td><input type="submit" value="勤務開始"></td></tr>
+  </table>
+
 </form>

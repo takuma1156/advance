@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\KintaiController;
+use App\Http\Controllers\AttendanceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,8 +14,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', [KintaiController::class,'index']);
+Route::post('/attendance_start', [KintaiController::class,'attendance_start']);
+Route::post('/attendance_end', [KintaiController::class,'attendance_end']);
+Route::get('/attendance', [AttendanceController::class,'index']);
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 });
 
